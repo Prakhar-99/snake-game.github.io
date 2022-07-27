@@ -1,7 +1,7 @@
  let board = document.getElementById('board');
  let inputDr = {x:0, y:0};
  let score = 0;
- let speed = 9;
+ let speed = 10;
  let lastPaintTime = 0;
  let snakeArray = [
     {x:13, y:12}
@@ -17,7 +17,7 @@
   let gameEnd = document.getElementById('game-over');
   let restart = document.getElementById('restart');
   let yourScore = document.getElementById('your-score');
-
+  
 
  // ------------------------------function & logic for game ----------------------------------
 
@@ -31,7 +31,6 @@ function main(cTime){
     
 
     mainGaming();
-}
 
 // -----------------------------------------------colllapse fuction----------------------------
 function iscollapse (srr){
@@ -69,6 +68,18 @@ function mainGaming(){
     };
     eatSound.play();
     score += 1;
+  }
+}
+// ------------------------speed--increase-------------
+
+  if(score >= 20){
+    speed = 15;
+  }
+  if(score >= 35){
+    speed = 20;
+  }
+  if(score >= 50){
+    speed = 25;
   }
 
   // ------------------score--count---------------------------
@@ -136,4 +147,27 @@ function mainGaming(){
               
             break;
         }
+   })
+
+
+   let upBtn = document.getElementById('up');
+   let downBtn = document.getElementById('down');
+   let leftBtn = document.getElementById('left');
+   let rightBtn = document.getElementById('right');
+
+   upBtn.addEventListener('click', () => {
+    inputDr.x = 0;
+    inputDr.y=-1;
+   })
+     downBtn.addEventListener('click', () => {
+    inputDr.x = 0;
+    inputDr.y=1;
+   })
+   leftBtn.addEventListener('click', () => {
+    inputDr.x = -1;
+    inputDr.y=-0;
+   })
+   rightBtn.addEventListener('click', () => {
+    inputDr.x = 1;
+    inputDr.y=0;
    })
