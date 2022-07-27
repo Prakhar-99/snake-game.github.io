@@ -204,6 +204,7 @@ border-radius: 15px;
     #game-over{
         width: 90%;
         height: 60%;
+        display: none;
     }
 }
 @media screen and (max-width:450px) {
@@ -213,6 +214,7 @@ border-radius: 15px;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        display: none;
     }
    #restart{
     margin: 20px 100px;
