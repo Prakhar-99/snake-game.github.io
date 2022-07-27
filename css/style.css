@@ -186,6 +186,24 @@ border-radius: 15px;
     right: 30px;
     top: 40px;
 }
+.sound-controler{
+    position: absolute;
+    top: 50px;
+    height: 50px;
+    width: 70px;
+    /* background: white; */
+    left: 40px;
+}
+.sound-controler img{
+    position: absolute;
+    height: 100%;
+}
+#close-sound{
+    display: none;
+}
+/* #open-sound{
+    display: block;
+} */
 @media screen and (max-width:950px) {
     #board{
         width: 80%;

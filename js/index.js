@@ -17,7 +17,9 @@
   let gameEnd = document.getElementById('game-over');
   let restart = document.getElementById('restart');
   let yourScore = document.getElementById('your-score');
-  
+  let moveSound = new Audio ('./music/move.mp3');
+let openSoundBtn = document.getElementById('open-sound');
+let closeSoundBtn = document.getElementById('close-sound');
 
  // ------------------------------function & logic for game ----------------------------------
 
@@ -28,37 +30,35 @@ function main(cTime){
         return;
     }
     lastPaintTime = cTime;
-    
-
     mainGaming();
-
-// -----------------------------------------------colllapse fuction----------------------------
-function iscollapse (srr){
-  for (let i = 1; i < snakeArray.length; i++) {
-   if(snakeArray[0].x === snakeArray[i].x && snakeArray[0].y === snakeArray[i].y){
-    return true;
-   }  
-  }
-  if(snakeArray[0].x >= 20 || snakeArray[0].x <= 0 || snakeArray[0].y <= 0 || snakeArray[0].y >= 20 ){
-    return true;
-  }
-}
     
-// ---------------------------------------------------main-gaming-function--------------------------
-function mainGaming(){
-    // update food and snakebody
-    if(iscollapse(snakeArray)){
-       gameEnd.style.display = 'block'
-       inputDr = { x:0, y:0 };
-       snakeArray = [{x:13, y:12}];
+    // -----------------------------------------------colllapse fuction----------------------------
+    function iscollapse (srr){
+      for (let i = 1; i < snakeArray.length; i++) {
+        if(snakeArray[0].x === snakeArray[i].x && snakeArray[0].y === snakeArray[i].y){
+          return true;
+        }  
+      }
+      if(snakeArray[0].x >= 20 || snakeArray[0].x <= 0 || snakeArray[0].y <= 0 || snakeArray[0].y >= 20 ){
+        return true;
+      }
+    }
+    
+    // ---------------------------------------------------main-gaming-function--------------------------
+    function mainGaming(){
+      // update food and snakebody
+      if(iscollapse(snakeArray)){
+        gameEnd.style.display = 'block'
+        inputDr = { x:0, y:0 };
+        snakeArray = [{x:13, y:12}];
        food ={x:5 , y:10};
        gameOverMusic.play();
        restart.addEventListener('click', e => {
-        gameEnd.style.display = 'none';
+         gameEnd.style.display = 'none';
         score = 0;
       })
     }
-
+    
     // on food taken
   if(snakeArray[0].x === food.x && snakeArray[0].y === food.y){
     snakeArray.unshift({x : snakeArray[0].x + inputDr.x, y : snakeArray[0].y + inputDr.y});
@@ -119,11 +119,27 @@ function mainGaming(){
        board.appendChild(foodElement); 
   
 }
-
+//  ----------------------------------control--------------------sound
+openSoundBtn.addEventListener('click', () => {
+  closeSoundBtn.style.display ='block';
+  openSoundBtn.style.display = 'none';
+ })
+ closeSoundBtn.addEventListener('click', () => {
+  closeSoundBtn.style.display ='none';  
+  openSoundBtn.style.display = 'block';
+ }) 
+function soundControl() {
+       if(openSoundBtn.style.display === 'block'){
+        moveSound.play();
+       }
+       else{
+        moveSound.pause();
+       }
+}
 
    window.requestAnimationFrame(main);
    window.addEventListener('keydown', e => {
-   
+  soundControl();
      inputDr = {x:0, y:1};
         switch (e.key) {
             case "ArrowUp" : 
@@ -171,3 +187,6 @@ function mainGaming(){
     inputDr.x = 1;
     inputDr.y=0;
    })
+
+  
+
